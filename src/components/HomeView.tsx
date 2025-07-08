@@ -22,7 +22,7 @@ export const HomeView: React.FC = () => {
       artist: 'Neon Nights',
       album: 'Synthwave Collection',
       duration: '4:12',
-      artwork: 'https://images.pexels.com/photos/1694819/pexels-photo-1694819.jpeg?auto=compress&cs=tinysrgb&w=300',
+      artwork: 'https://images.pexels.com/photos/1540406/pexels-photo-1540406.jpeg?auto=compress&cs=tinysrgb&w=300',
       audioUrl: 'demo.mp3'
     },
     {
