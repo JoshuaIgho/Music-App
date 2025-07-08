@@ -1,12 +1,14 @@
 import React from 'react';
-import { Home, Search, Library, Heart, Plus, Music } from 'lucide-react';
+import { Home, Search, Library, Heart, Plus, Music, X } from 'lucide-react';
 
 interface SidebarProps {
   activeView: 'home' | 'search' | 'library' | 'playlists';
   setActiveView: (view: 'home' | 'search' | 'library' | 'playlists') => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isOpen, onClose }) => {
   const menuItems = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'search', label: 'Search', icon: Search },
@@ -21,8 +23,23 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) =
     'Study Focus',
   ];
 
+  const handleItemClick = (view: any) => {
+    setActiveView(view);
+    onClose();
+  };
   return (
-    <div className="w-64 bg-black/20 backdrop-blur-md border-r border-white/10 p-6">
+    <div className={`
+      fixed lg:relative top-0 left-0 h-full w-64 bg-black/90 lg:bg-black/20 backdrop-blur-md 
+      border-r border-white/10 p-6 z-50 transform transition-transform duration-300 ease-in-out
+      ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+    `}>
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-gray-400 hover:text-white lg:hidden"
+      >
+        <X className="w-6 h-6" />
+      </button>
+      
       <div className="flex items-center gap-2 mb-8">
         <Music className="w-8 h-8 text-purple-400" />
         <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -34,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) =
         {menuItems.map((item) => (
           <button
             key={item.id}
-            onClick={() => setActiveView(item.id as any)}
+            onClick={() => handleItemClick(item.id)}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
               activeView === item.id
                 ? 'bg-purple-600/30 text-purple-400 border border-purple-500/30'

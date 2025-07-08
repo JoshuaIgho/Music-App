@@ -75,18 +75,18 @@ export const SearchView: React.FC = () => {
   };
 
   return (
-    <div className="h-full overflow-y-auto">
-      <div className="p-8">
+    <div className="h-full overflow-y-auto pb-24">
+      <div className="p-4 sm:p-6 lg:p-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-6">Search</h1>
-          <div className="relative max-w-md">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">Search</h1>
+          <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
               placeholder="What do you want to listen to?"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-10 pr-10 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full pl-10 pr-10 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"
             />
             {searchQuery && (
               <button
@@ -101,7 +101,7 @@ export const SearchView: React.FC = () => {
 
         {searchQuery && (
           <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">
               {searchResults.length > 0 ? `Search Results (${searchResults.length})` : 'No results found'}
             </h2>
             {searchResults.length > 0 && <TrackList tracks={searchResults} />}
@@ -110,8 +110,8 @@ export const SearchView: React.FC = () => {
 
         {!searchQuery && (
           <div>
-            <h2 className="text-2xl font-bold mb-6">Browse all</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">Browse all</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
               {[
                 { name: 'Pop', color: 'from-pink-500 to-purple-500' },
                 { name: 'Rock', color: 'from-red-500 to-orange-500' },
@@ -124,9 +124,9 @@ export const SearchView: React.FC = () => {
               ].map((genre) => (
                 <div
                   key={genre.name}
-                  className={`bg-gradient-to-br ${genre.color} p-6 rounded-lg cursor-pointer hover:scale-105 transition-transform duration-200`}
+                  className={`bg-gradient-to-br ${genre.color} p-4 sm:p-6 rounded-lg cursor-pointer hover:scale-105 transition-transform duration-200`}
                 >
-                  <h3 className="text-xl font-bold text-white">{genre.name}</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-white">{genre.name}</h3>
                 </div>
               ))}
             </div>

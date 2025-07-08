@@ -78,7 +78,7 @@ export const MusicPlayer: React.FC = () => {
   if (!state.currentTrack) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md border-t border-white/10 p-4">
+    <div className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-md border-t border-white/10 p-2 sm:p-4">
       <audio
         ref={audioRef}
         onTimeUpdate={handleTimeUpdate}
@@ -87,31 +87,31 @@ export const MusicPlayer: React.FC = () => {
         src={state.currentTrack.audioUrl}
       />
       
-      <div className="flex items-center justify-between max-w-screen-2xl mx-auto">
+      <div className="flex flex-col sm:flex-row items-center justify-between max-w-screen-2xl mx-auto gap-2 sm:gap-4">
         {/* Currently Playing */}
-        <div className="flex items-center gap-4 flex-1 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0 w-full sm:w-auto">
           <img
             src={state.currentTrack.artwork}
             alt={state.currentTrack.title}
-            className="w-14 h-14 rounded-lg object-cover"
+            className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg object-cover flex-shrink-0"
           />
-          <div className="min-w-0">
-            <h4 className="font-medium text-white truncate">{state.currentTrack.title}</h4>
-            <p className="text-sm text-gray-400 truncate">{state.currentTrack.artist}</p>
+          <div className="min-w-0 flex-1">
+            <h4 className="font-medium text-white truncate text-sm sm:text-base">{state.currentTrack.title}</h4>
+            <p className="text-xs sm:text-sm text-gray-400 truncate">{state.currentTrack.artist}</p>
           </div>
-          <button className="text-gray-400 hover:text-white transition-colors">
+          <button className="text-gray-400 hover:text-white transition-colors hidden sm:block">
             <Heart className="w-5 h-5" />
           </button>
         </div>
 
         {/* Player Controls */}
-        <div className="flex flex-col items-center gap-2 flex-1 max-w-md">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col items-center gap-1 sm:gap-2 flex-1 max-w-md w-full sm:w-auto">
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={() => dispatch({ type: 'TOGGLE_SHUFFLE' })}
               className={`transition-colors ${
                 state.shuffleMode ? 'text-purple-400' : 'text-gray-400 hover:text-white'
-              }`}
+              } hidden sm:block`}
             >
               <Shuffle className="w-5 h-5" />
             </button>
@@ -119,32 +119,32 @@ export const MusicPlayer: React.FC = () => {
               onClick={() => dispatch({ type: 'PREVIOUS_TRACK' })}
               className="text-gray-400 hover:text-white transition-colors"
             >
-              <SkipBack className="w-5 h-5" />
+              <SkipBack className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={() => dispatch({ type: 'TOGGLE_PLAY' })}
-              className="bg-white text-black rounded-full p-2 hover:scale-105 transition-transform"
+              className="bg-white text-black rounded-full p-1.5 sm:p-2 hover:scale-105 transition-transform"
             >
-              {state.isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+              {state.isPlaying ? <Pause className="w-4 h-4 sm:w-5 sm:h-5" /> : <Play className="w-4 h-4 sm:w-5 sm:h-5" />}
             </button>
             <button
               onClick={() => dispatch({ type: 'NEXT_TRACK' })}
               className="text-gray-400 hover:text-white transition-colors"
             >
-              <SkipForward className="w-5 h-5" />
+              <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={() => dispatch({ type: 'TOGGLE_REPEAT' })}
               className={`transition-colors ${
                 state.repeatMode !== 'none' ? 'text-purple-400' : 'text-gray-400 hover:text-white'
-              }`}
+              } hidden sm:block`}
             >
               <Repeat className="w-5 h-5" />
             </button>
           </div>
           
-          <div className="flex items-center gap-2 w-full">
-            <span className="text-xs text-gray-400 w-10">{formatTime(currentTime)}</span>
+          <div className="flex items-center gap-1 sm:gap-2 w-full">
+            <span className="text-xs text-gray-400 w-8 sm:w-10 text-right">{formatTime(currentTime)}</span>
             <input
               type="range"
               min="0"
@@ -153,12 +153,12 @@ export const MusicPlayer: React.FC = () => {
               onChange={handleSeek}
               className="flex-1 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
             />
-            <span className="text-xs text-gray-400 w-10">{formatTime(duration)}</span>
+            <span className="text-xs text-gray-400 w-8 sm:w-10">{formatTime(duration)}</span>
           </div>
         </div>
 
         {/* Volume Control */}
-        <div className="flex items-center gap-4 flex-1 justify-end">
+        <div className="hidden sm:flex items-center gap-4 flex-1 justify-end">
           <button
             onClick={toggleMute}
             className="text-gray-400 hover:text-white transition-colors"
